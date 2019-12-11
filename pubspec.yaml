@@ -1,8 +1,8 @@
 name: mcnmr_request_wrapper
-description: A new Flutter package project.
+description: Library for wrapping any request, executing request while build placeholder widget, then build builder widget when request executed.
 version: 0.0.1
-author:
-homepage:
+author: M Irfan Alfiansyah <irfanalfiansyah10@gmail.com>
+homepage: "https://github.com/irfanalfiansyah10/flutter-plugin-request_wrapper"
 
 environment:
   sdk: ">=2.1.0 <3.0.0"

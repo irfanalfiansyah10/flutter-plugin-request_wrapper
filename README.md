@@ -1,6 +1,6 @@
 # mcnmr_request_wrapper
 
-A new Flutter package project.
+Library for wrapping any request, executing request while build placeholder widget, then build builder widget when request executed
 
 ## Getting Started
 

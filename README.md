@@ -1,6 +1,6 @@
 # mcnmr_request_wrapper
 
-Library for wrapping any request, executing request while build placeholder widget, then build builder widget when request executed
+Library for wrapping any request, executing request while build placeholder widget, then build builder widget when request executed. Usage, description, and example will be added later cause i'm still busy yet
 
 ## Getting Started
 

@@ -1,27 +1,25 @@
-library mcnmr_request_wrapper;
-
 import 'package:flutter/widgets.dart';
 import 'package:mcnmr_request_wrapper/RequestWrapper.dart';
 
-typedef RequestWrapperBuilder<T> = Widget Function(BuildContext context, T data);
+typedef RequestWrapperBuilder<T> = Widget Function(
+    BuildContext context, T data);
 
 class RequestWrapperWidget<T> extends StatefulWidget {
-
   final RequestWrapper<T> requestWrapper;
   final Widget placeholder;
   final RequestWrapperBuilder<T> builder;
 
-  RequestWrapperWidget({
-    @required this.requestWrapper,
-    @required this.placeholder,
-    @required this.builder});
+  RequestWrapperWidget(
+      {@required this.requestWrapper,
+      @required this.placeholder,
+      @required this.builder});
 
   @override
-  State<RequestWrapperWidget<T>> createState() => _RequestWrapperWidgetState<T>();
+  State<RequestWrapperWidget<T>> createState() =>
+      _RequestWrapperWidgetState<T>();
 }
 
 class _RequestWrapperWidgetState<T> extends State<RequestWrapperWidget<T>> {
-
   bool isFinished = false;
 
   @override
@@ -32,15 +30,17 @@ class _RequestWrapperWidgetState<T> extends State<RequestWrapperWidget<T>> {
      * Check if the wrapper has initial value
      */
     setState(() {
-      isFinished = widget.requestWrapper.status == RequestWrapper.STATUS_FINISHED;
+      isFinished =
+          widget.requestWrapper.status == RequestWrapper.STATUS_FINISHED;
     });
 
     /**
      * Listen on status change in wrapper
      */
-    widget.requestWrapper.addListener((){
+    widget.requestWrapper.addListener(() {
       setState(() {
-        isFinished = widget.requestWrapper.status == RequestWrapper.STATUS_FINISHED;
+        isFinished =
+            widget.requestWrapper.status == RequestWrapper.STATUS_FINISHED;
       });
     });
   }
@@ -58,7 +58,8 @@ class _RequestWrapperWidgetState<T> extends State<RequestWrapperWidget<T>> {
     if (isFinished) {
       return widget.builder(context, widget.requestWrapper.result);
     } else {
-      if (widget.requestWrapper.status == RequestWrapper.STATUS_LOADING_KEEP_STATE) {
+      if (widget.requestWrapper.status ==
+          RequestWrapper.STATUS_LOADING_KEEP_STATE) {
         if (widget.requestWrapper.result == null) {
           return widget.placeholder;
         } else {

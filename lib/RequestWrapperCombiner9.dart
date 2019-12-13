@@ -1,20 +1,19 @@
-library mcnmr_request_wrapper;
-
 import 'package:mcnmr_request_wrapper/RequestWrapper.dart';
 
-class RequestWrapperCombiner9<A, B, C, D, E, F, G, H, I, J> extends RequestWrapper<J>{
-
+class RequestWrapperCombiner9<A, B, C, D, E, F, G, H, I, J>
+    extends RequestWrapper<J> {
   int loadingType = RequestWrapper.STATUS_LOADING;
 
-  void asLoading(){
+  void asLoading() {
     loadingType = RequestWrapper.STATUS_LOADING;
   }
 
-  void asLoadingKeepState(){
+  void asLoadingKeepState() {
     loadingType = RequestWrapper.STATUS_LOADING_KEEP_STATE;
   }
 
-  RequestWrapperCombiner9.combine(RequestWrapper<A> a,
+  RequestWrapperCombiner9.combine(
+      RequestWrapper<A> a,
       RequestWrapper<B> b,
       RequestWrapper<C> c,
       RequestWrapper<D> d,
@@ -24,17 +23,16 @@ class RequestWrapperCombiner9<A, B, C, D, E, F, G, H, I, J> extends RequestWrapp
       RequestWrapper<H> h,
       RequestWrapper<I> i,
       J Function(A, B, C, D, E, F, G, H, I) map,
-      {J initialValue}){
-
-    if(initialValue != null) {
+      {J initialValue}) {
+    if (initialValue != null) {
       finishRequest(initialValue);
     }
 
-    void _notify(A a, B b, C c, D d, E e, F f, G g, H h, I i){
+    void _notify(A a, B b, C c, D d, E e, F f, G g, H h, I i) {
       finishRequest(map(a, b, c, d, e, f, g, h, i));
     }
 
-    void _listen(){
+    void _listen() {
       var condition = a.status == RequestWrapper.STATUS_FINISHED &&
           b.status == RequestWrapper.STATUS_FINISHED &&
           c.status == RequestWrapper.STATUS_FINISHED &&
@@ -45,16 +43,17 @@ class RequestWrapperCombiner9<A, B, C, D, E, F, G, H, I, J> extends RequestWrapp
           h.status == RequestWrapper.STATUS_FINISHED &&
           i.status == RequestWrapper.STATUS_FINISHED;
 
-      if(!condition){
-        if(loadingType == RequestWrapper.STATUS_LOADING){
+      if (!condition) {
+        if (loadingType == RequestWrapper.STATUS_LOADING) {
           doRequest();
-        }else {
+        } else {
           doRequestKeepState();
         }
         return;
       }
 
-      _notify(a.result, b.result, c.result, d.result, e.result, f.result, g.result, h.result, i.result);
+      _notify(a.result, b.result, c.result, d.result, e.result, f.result,
+          g.result, h.result, i.result);
     }
 
     a.addListener(() => _listen());
